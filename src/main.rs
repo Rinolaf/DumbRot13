@@ -34,22 +34,14 @@ fn main() {
     }
 }
 
-fn decode(x: char) -> char{
-    //mon but ici est de trouver l'index de x dans alphabet ensuite d'ajouter a cet index 13 et faire modulo 25
-    let alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
-    let index = (position(&x) + 13) % 26;
-    return alphabet[index];
-}
-
-fn position (x: &char) -> usize {
-    //mon but avec cette 
-    let alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
-    let mut incr = 0;
-    loop{
-        if x == &alphabet[incr] {
-            return incr;
-        } else {
-            incr += 1;
-        }
+fn decode(x:char) -> char {
+    if x.is_lowercase() {
+        let first = 'a' as u8;
+        let offset = (x as u8 - first + 13) % 26;
+        return (first + offset) as char;
+    } else {
+        let first = 'A' as u8;
+        let offset = (x as u8 - first + 13) % 26;
+        return (first + offset) as char;
     }
 }
